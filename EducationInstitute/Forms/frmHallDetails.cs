@@ -135,6 +135,7 @@ namespace EducationInstitute.Forms
          //    [sp_Delete_HallData]
              DeleteHallData();
              //testing github for 2nd time
+             //chintaka made a comment huhu
          }
 
          private void DeleteHallData()

@@ -17,3 +17,6 @@ E:\Education Institute\EducationInstitute\EducationInstitute\bin\Debug\Education
 E:\Education Institute\EducationInstitute\EducationInstitute\bin\Debug\EducationInstitute.pdb
 E:\Education Institute\EducationInstitute\EducationInstitute\obj\Debug\EducationInstitute.exe
 E:\Education Institute\EducationInstitute\EducationInstitute\obj\Debug\EducationInstitute.pdb
+E:\EducationInstitute\EducationInstitute\bin\Debug\EducationInstitute.exe.config
+E:\EducationInstitute\EducationInstitute\obj\Debug\EducationInstitute.exe
+E:\EducationInstitute\EducationInstitute\obj\Debug\EducationInstitute.pdb
