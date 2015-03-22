@@ -132,22 +132,19 @@ namespace EducationInstitute.Forms
 
          private void btnDelete_Click(object sender, EventArgs e)
          {
-         //    [sp_Delete_HallData]
              DeleteHallData();
-             //testing github for 2nd time
-             //chintaka made a comment huhu
          }
 
          private void DeleteHallData()
          {
-             
-             SqlCommand command = new SqlCommand("sp_SelectAll_HallData", obj.sqlConnection);
-             command.CommandType = System.Data.CommandType.StoredProcedure;
+             SqlCommand cmd = new SqlCommand();
+             cmd.Connection = obj.sqlConnection;
+             cmd.CommandText = "sp_Delete_HallData";
+             cmd.CommandType = CommandType.StoredProcedure;
+             cmd.Parameters.AddWithValue("@Hall_No", txtHallNo.Text.ToString());
 
-            // rs = command.ExecuteReader();
-             command.CommandType = CommandType.StoredProcedure;
-             command.ExecuteNonQuery();
-             SaveData();
+             cmd.ExecuteNonQuery();
+             PopulateData();
          }
     
         
