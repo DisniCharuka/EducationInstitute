@@ -13,29 +13,80 @@ using System.Text.RegularExpressions;
 namespace EducationInstitute.Forms
 {
     public partial class frmHallDetails : Form
-    {
+    { 
+        #region Public Properties
+
         EducationInstitute.PublicClasses.DBConnection obj;
         SqlDataReader rs = null;
         int newData = 0;
         String oldHallNo = null;
         String newHallNo;
+
+        #endregion
+
+        #region Constructors
+
         public frmHallDetails()
         {
             InitializeComponent();
             DbConnectionMethod();
         }
 
+        #endregion
+
+        #region DB Connection
+
         private void DbConnectionMethod()
         {
             obj = new EducationInstitute.PublicClasses.DBConnection();
             obj.DbConnectionMethod();
-
         }
+
+        #endregion
+
+        #region Event Handlers
 
         private void btnPopulate_Click(object sender, EventArgs e)
         {
             PopulateData();
         }
+
+        private void btnAddNew_Click(object sender, EventArgs e)
+        {
+            ClearSpace(this);
+            GetNextHallNo();
+            newData = 1;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveData();
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearSpace(this);
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            DeleteHallData();
+        }
+
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        #endregion
+
+        #region Methods
 
         private void PopulateData()
         {
@@ -48,6 +99,43 @@ namespace EducationInstitute.Forms
             rs.Close();
         }
 
+        private void SaveData()
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = obj.sqlConnection;
+            if (newData == 1)
+            {
+                cmd.CommandText = "sp_Insert_HallData";
+            }
+            else
+            {
+                cmd.CommandText = "sp_Update_HallData";
+            }
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Hall_No", txtHallNo.Text.ToString());
+            cmd.Parameters.AddWithValue("@Hall_Name", txtHallName.Text.ToString());
+
+            cmd.ExecuteNonQuery();
+            PopulateData();
+
+        }
+
+        private void DeleteHallData()
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = obj.sqlConnection;
+            cmd.CommandText = "sp_Delete_HallData";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Hall_No", txtHallNo.Text.ToString());
+
+            cmd.ExecuteNonQuery();
+            PopulateData();
+        }
+        #endregion
+
+        #region Data grid view Actions
+
         private void dgvHallDetails_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvHallDetails.SelectedRows.Count == 1)
@@ -57,16 +145,12 @@ namespace EducationInstitute.Forms
             }
         }
 
-        private void btnAddNew_Click(object sender, EventArgs e)
-        {
-            ClearSpace(this);
-            GetNextHallNo();
-            newData = 1;
-        }
+        #endregion
+
+        #region Get Next Hall No
 
         private void GetNextHallNo()
         {
-           
             SqlCommand command = new SqlCommand("sp_SelectAll_HallData", obj.sqlConnection);
             command.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -83,43 +167,13 @@ namespace EducationInstitute.Forms
                 txtHallNo.Text = newHallNo;
             }
             rs.Close();
-            
          
         }
+        #endregion
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            SaveData();
-        }
+        #region Clear Space method
 
-        private void SaveData()
-        {
-             SqlCommand cmd = new SqlCommand();
-                cmd.Connection = obj.sqlConnection;
-                if (newData == 1)
-                {
-                    cmd.CommandText = "sp_Insert_HallData";
-                }
-                else
-                {
-                    cmd.CommandText = "sp_Update_HallData";
-                }
-
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Hall_No", txtHallNo.Text.ToString());
-                cmd.Parameters.AddWithValue("@Hall_Name", txtHallName.Text.ToString());
-
-                cmd.ExecuteNonQuery();
-                PopulateData();
-
-        }
-
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            ClearSpace(this);
-        }
-
-         public static void ClearSpace(Control control)
+        public static void ClearSpace(Control control)
         {
            foreach (Control c in control.Controls)
              {
@@ -130,23 +184,8 @@ namespace EducationInstitute.Forms
              }
          }
 
-         private void btnDelete_Click(object sender, EventArgs e)
-         {
-             DeleteHallData();
-         }
+        #endregion
 
-         private void DeleteHallData()
-         {
-             SqlCommand cmd = new SqlCommand();
-             cmd.Connection = obj.sqlConnection;
-             cmd.CommandText = "sp_Delete_HallData";
-             cmd.CommandType = CommandType.StoredProcedure;
-             cmd.Parameters.AddWithValue("@Hall_No", txtHallNo.Text.ToString());
 
-             cmd.ExecuteNonQuery();
-             PopulateData();
-         }
-    
-        
     }
 }
