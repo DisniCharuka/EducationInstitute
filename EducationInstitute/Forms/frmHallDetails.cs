@@ -17,6 +17,8 @@ namespace EducationInstitute.Forms
         #region Public Properties
 
         EducationInstitute.PublicClasses.DBConnection obj;
+        EducationInstitute.PublicClasses.PopulateData populateData;
+        EducationInstitute.PublicClasses.DeleteData deleteData;
         SqlDataReader rs = null;
         int newData = 0;
         String oldHallNo = null;
@@ -76,7 +78,23 @@ namespace EducationInstitute.Forms
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            SearchHallData();
+        }
 
+        private void SearchHallData()
+        {
+            SqlCommand cmd = new SqlCommand("sp_Search_HallData", obj.sqlConnection);
+            cmd.CommandType = CommandType.StoredProcedure;
+           // cmd.Parameters.Add("@HallNo", SqlDbType.VarChar).Value = txtHallNo.Text;
+            cmd.Parameters.AddWithValue("@HallNo", txtHallNo.Text);
+           // SqlDataAdapter da = new SqlDataAdapter(cmd);
+          // rs = cmd.ExecuteReader();
+            //cmd.ExecuteNonQuery();
+            DataTable dt = new DataTable();
+            rs = cmd.ExecuteReader();
+            dt.Load(rs);
+            dgvHallDetails.DataSource = dt;
+            rs.Close();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -90,13 +108,11 @@ namespace EducationInstitute.Forms
 
         private void PopulateData()
         {
-            SqlCommand command = new SqlCommand("sp_Select_HallData", obj.sqlConnection);
-            command.CommandType = System.Data.CommandType.StoredProcedure;
-            DataTable dt = new DataTable();
-            rs = command.ExecuteReader();
-            dt.Load(rs);
-            dgvHallDetails.DataSource = dt;
-            rs.Close();
+            populateData = new PublicClasses.PopulateData();
+            //populateData.PopulateData("sp_Select_HallData", obj.sqlConnection, rs);
+
+            dgvHallDetails.DataSource = populateData.PopulateDetails("sp_Select_HallData", obj.sqlConnection, rs);
+          
         }
 
         private void SaveData()
@@ -123,13 +139,8 @@ namespace EducationInstitute.Forms
 
         private void DeleteHallData()
         {
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = obj.sqlConnection;
-            cmd.CommandText = "sp_Delete_HallData";
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@Hall_No", txtHallNo.Text.ToString());
-
-            cmd.ExecuteNonQuery();
+            deleteData = new PublicClasses.DeleteData();
+            deleteData.DeleteDetails("sp_Delete_HallData", obj.sqlConnection, "@Hall_No", txtHallNo.Text.ToString());
             PopulateData();
         }
         #endregion
