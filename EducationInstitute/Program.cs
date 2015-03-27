@@ -18,7 +18,7 @@ namespace EducationInstitute
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmHallDetails());
+            Application.Run(new frmEmployeeDetails());
         }
     }
 }

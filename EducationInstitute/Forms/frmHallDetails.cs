@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
+using System.Collections;
+using System.Text;
+using System.IO;
+using System.Web;
 
 namespace EducationInstitute.Forms
 {
@@ -85,11 +89,7 @@ namespace EducationInstitute.Forms
         {
             SqlCommand cmd = new SqlCommand("sp_Search_HallData", obj.sqlConnection);
             cmd.CommandType = CommandType.StoredProcedure;
-           // cmd.Parameters.Add("@HallNo", SqlDbType.VarChar).Value = txtHallNo.Text;
             cmd.Parameters.AddWithValue("@HallNo", txtHallNo.Text);
-           // SqlDataAdapter da = new SqlDataAdapter(cmd);
-          // rs = cmd.ExecuteReader();
-            //cmd.ExecuteNonQuery();
             DataTable dt = new DataTable();
             rs = cmd.ExecuteReader();
             dt.Load(rs);
@@ -109,8 +109,6 @@ namespace EducationInstitute.Forms
         private void PopulateData()
         {
             populateData = new PublicClasses.PopulateData();
-            //populateData.PopulateData("sp_Select_HallData", obj.sqlConnection, rs);
-
             dgvHallDetails.DataSource = populateData.PopulateDetails("sp_Select_HallData", obj.sqlConnection, rs);
           
         }
@@ -119,21 +117,33 @@ namespace EducationInstitute.Forms
         {
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = obj.sqlConnection;
-            if (newData == 1)
+
+            if (txtHallNo.Text == "" || txtHallName.Text == "")
             {
-                cmd.CommandText = "sp_Insert_HallData";
+                MessageBox.Show(Properties.Resources.dataFieldMissing, Properties.Resources.CompanyName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                cmd.CommandText = "sp_Update_HallData";
-            }
+                if (newData == 1)
+                {
+                    cmd.CommandText = "sp_Insert_HallData";
+                    MessageBox.Show(Properties.Resources.insertHallDetail, Properties.Resources.CompanyName, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@Hall_No", txtHallNo.Text.ToString());
-            cmd.Parameters.AddWithValue("@Hall_Name", txtHallName.Text.ToString());
+                }
+                else
+                {
+                    cmd.CommandText = "sp_Update_HallData";
+                    MessageBox.Show(Properties.Resources.updatedHallDetail, Properties.Resources.CompanyName, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            cmd.ExecuteNonQuery();
-            PopulateData();
+                }
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Hall_No", txtHallNo.Text.ToString());
+                cmd.Parameters.AddWithValue("@Hall_Name", txtHallName.Text.ToString());
+
+                cmd.ExecuteNonQuery();
+                PopulateData();
+           }
 
         }
 
@@ -141,6 +151,7 @@ namespace EducationInstitute.Forms
         {
             deleteData = new PublicClasses.DeleteData();
             deleteData.DeleteDetails("sp_Delete_HallData", obj.sqlConnection, "@Hall_No", txtHallNo.Text.ToString());
+            MessageBox.Show(Properties.Resources.deleteHallDetails, Properties.Resources.CompanyName, MessageBoxButtons.OK, MessageBoxIcon.Information);
             PopulateData();
         }
         #endregion

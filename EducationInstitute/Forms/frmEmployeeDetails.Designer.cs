@@ -50,20 +50,10 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnPopulate = new System.Windows.Forms.Button();
-            this.colEmployeeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEmpNic = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEmpFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEmpLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEmpDob = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEmpAddress1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEmpAddress2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEmpAddress3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEmpContactNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployeeDetails)).BeginInit();
             this.SuspendLayout();
             // 
@@ -214,20 +204,11 @@
             // dgvEmployeeDetails
             // 
             this.dgvEmployeeDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEmployeeDetails.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colEmployeeId,
-            this.colEmpNic,
-            this.colEmpFirstName,
-            this.colEmpLastName,
-            this.colEmpDob,
-            this.colEmpAddress1,
-            this.colEmpAddress2,
-            this.colEmpAddress3,
-            this.colEmpContactNo});
             this.dgvEmployeeDetails.Location = new System.Drawing.Point(106, 97);
             this.dgvEmployeeDetails.Name = "dgvEmployeeDetails";
             this.dgvEmployeeDetails.Size = new System.Drawing.Size(764, 305);
             this.dgvEmployeeDetails.TabIndex = 18;
+            this.dgvEmployeeDetails.SelectionChanged += new System.EventHandler(this.dgvEmployeeDetails_SelectionChanged);
             // 
             // btnClear
             // 
@@ -237,15 +218,17 @@
             this.btnClear.TabIndex = 136;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(12, 23);
+            this.btnExit.Location = new System.Drawing.Point(12, 55);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 135;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnDelete
             // 
@@ -256,15 +239,6 @@
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Location = new System.Drawing.Point(12, 81);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
-            this.btnUpdate.TabIndex = 133;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            // 
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(12, 197);
@@ -273,6 +247,7 @@
             this.btnSave.TabIndex = 132;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnAddNew
             // 
@@ -282,6 +257,7 @@
             this.btnAddNew.TabIndex = 131;
             this.btnAddNew.Text = "Add New";
             this.btnAddNew.UseVisualStyleBackColor = true;
+            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
             // btnSearch
             // 
@@ -294,57 +270,13 @@
             // 
             // btnPopulate
             // 
-            this.btnPopulate.Location = new System.Drawing.Point(12, 52);
+            this.btnPopulate.Location = new System.Drawing.Point(12, 81);
             this.btnPopulate.Name = "btnPopulate";
             this.btnPopulate.Size = new System.Drawing.Size(75, 23);
             this.btnPopulate.TabIndex = 129;
             this.btnPopulate.Text = "Populate";
             this.btnPopulate.UseVisualStyleBackColor = true;
-            // 
-            // colEmployeeId
-            // 
-            this.colEmployeeId.HeaderText = "Employee Id";
-            this.colEmployeeId.Name = "colEmployeeId";
-            // 
-            // colEmpNic
-            // 
-            this.colEmpNic.HeaderText = "NIC";
-            this.colEmpNic.Name = "colEmpNic";
-            // 
-            // colEmpFirstName
-            // 
-            this.colEmpFirstName.HeaderText = "First Name";
-            this.colEmpFirstName.Name = "colEmpFirstName";
-            // 
-            // colEmpLastName
-            // 
-            this.colEmpLastName.HeaderText = "Last Name";
-            this.colEmpLastName.Name = "colEmpLastName";
-            // 
-            // colEmpDob
-            // 
-            this.colEmpDob.HeaderText = "Date Of Birth";
-            this.colEmpDob.Name = "colEmpDob";
-            // 
-            // colEmpAddress1
-            // 
-            this.colEmpAddress1.HeaderText = "Address1";
-            this.colEmpAddress1.Name = "colEmpAddress1";
-            // 
-            // colEmpAddress2
-            // 
-            this.colEmpAddress2.HeaderText = "Address2";
-            this.colEmpAddress2.Name = "colEmpAddress2";
-            // 
-            // colEmpAddress3
-            // 
-            this.colEmpAddress3.HeaderText = "Address3";
-            this.colEmpAddress3.Name = "colEmpAddress3";
-            // 
-            // colEmpContactNo
-            // 
-            this.colEmpContactNo.HeaderText = "Contact No";
-            this.colEmpContactNo.Name = "colEmpContactNo";
+            this.btnPopulate.Click += new System.EventHandler(this.btnPopulate_Click);
             // 
             // frmEmployeeDetails
             // 
@@ -354,7 +286,6 @@
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnAddNew);
             this.Controls.Add(this.btnSearch);
@@ -407,19 +338,9 @@
         private System.Windows.Forms.TextBox txtEmpContactNo;
         private System.Windows.Forms.DateTimePicker dtpEmpDob;
         private System.Windows.Forms.DataGridView dgvEmployeeDetails;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEmployeeId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEmpNic;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEmpFirstName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEmpLastName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEmpDob;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEmpAddress1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEmpAddress2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEmpAddress3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEmpContactNo;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnAddNew;
         private System.Windows.Forms.Button btnSearch;
