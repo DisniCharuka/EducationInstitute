@@ -104,34 +104,40 @@ namespace EducationInstitute.Forms
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = obj.sqlConnection;
 
-
-            if (newData == 1)
+            if (txtEmployeeId.Text == "" || txtEmpFirstName.Text == "" || txtEmpNic.Text == "")
             {
-                cmd.CommandText = "sp_Insert_EmployeeData";
-                MessageBox.Show(Properties.Resources.insertEmployee, Properties.Resources.CompanyName, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                MessageBox.Show(Properties.Resources.dataFieldMissing, Properties.Resources.CompanyName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                cmd.CommandText = "sp_Update_EmployeeData";
-                MessageBox.Show(Properties.Resources.updatedEmployee, Properties.Resources.CompanyName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (newData == 1)
+                {
+                    cmd.CommandText = "sp_Insert_EmployeeData";
+                    MessageBox.Show(Properties.Resources.insertEmployee, Properties.Resources.CompanyName, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                }
+                else
+                {
+                    cmd.CommandText = "sp_Update_EmployeeData";
+                    MessageBox.Show(Properties.Resources.updatedEmployee, Properties.Resources.CompanyName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Employee_Id", txtEmployeeId.Text.ToString());
+                cmd.Parameters.AddWithValue("@Employee_Nic", txtEmpNic.Text.ToString());
+                cmd.Parameters.AddWithValue("@Employee_FirstName", txtEmpFirstName.Text.ToString());
+                cmd.Parameters.AddWithValue("@Employee_LastName", txtEmpLastName.Text.ToString());
+                cmd.Parameters.AddWithValue("@Employee_Dob", dtpEmpDob.Value.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@Employee_Address1", txtEmpAddress1.Text.ToString());
+                cmd.Parameters.AddWithValue("@Employee_Address2", txtEmpAddress2.Text.ToString());
+                cmd.Parameters.AddWithValue("@Employee_Address3", txtEmpAddress3.Text.ToString());
+                cmd.Parameters.AddWithValue("@Employee_ContactNo", txtEmpContactNo.Text.ToString());
+
+
+                cmd.ExecuteNonQuery();
+                PopulateData();
             }
-
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@Employee_Id", txtEmployeeId.Text.ToString());
-            cmd.Parameters.AddWithValue("@Employee_Nic", txtEmpNic.Text.ToString());
-            cmd.Parameters.AddWithValue("@Employee_FirstName", txtEmpFirstName.Text.ToString());
-            cmd.Parameters.AddWithValue("@Employee_LastName", txtEmpLastName.Text.ToString());
-            cmd.Parameters.AddWithValue("@Employee_Dob", dtpEmpDob.Value.ToString("yyyy-MM-dd"));
-            cmd.Parameters.AddWithValue("@Employee_Address1", txtEmpAddress1.Text.ToString());
-            cmd.Parameters.AddWithValue("@Employee_Address2", txtEmpAddress2.Text.ToString());
-            cmd.Parameters.AddWithValue("@Employee_Address3", txtEmpAddress3.Text.ToString());
-            cmd.Parameters.AddWithValue("@Employee_ContactNo", txtEmpContactNo.Text.ToString());
-
-
-            cmd.ExecuteNonQuery();
-            PopulateData();
            
 
         }
@@ -215,6 +221,8 @@ namespace EducationInstitute.Forms
 
         #endregion
 
+        #region Shortcut keys
+
         private void btnSearch_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F2)
@@ -245,6 +253,7 @@ namespace EducationInstitute.Forms
             }
         }
 
+        #endregion
 
     }
 }

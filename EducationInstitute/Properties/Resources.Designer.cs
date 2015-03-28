@@ -97,6 +97,15 @@ namespace EducationInstitute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have successfully deleted a Subject.
+        /// </summary>
+        internal static string deleteSubject {
+            get {
+                return ResourceManager.GetString("deleteSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have successfully inserted an Employee .
         /// </summary>
         internal static string insertEmployee {
@@ -115,6 +124,15 @@ namespace EducationInstitute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have successfully inserted a Subject.
+        /// </summary>
+        internal static string insertSubject {
+            get {
+                return ResourceManager.GetString("insertSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have successfully updated an Employee .
         /// </summary>
         internal static string updatedEmployee {
@@ -129,6 +147,15 @@ namespace EducationInstitute.Properties {
         internal static string updatedHallDetail {
             get {
                 return ResourceManager.GetString("updatedHallDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have successfully updated a Subject Detail.
+        /// </summary>
+        internal static string updateSubject {
+            get {
+                return ResourceManager.GetString("updateSubject", resourceCulture);
             }
         }
     }

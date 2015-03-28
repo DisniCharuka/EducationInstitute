@@ -48,7 +48,6 @@
             this.dtpStuDob = new System.Windows.Forms.DateTimePicker();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -232,7 +231,7 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(16, 24);
+            this.btnExit.Location = new System.Drawing.Point(16, 53);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 60;
@@ -247,15 +246,6 @@
             this.btnDelete.TabIndex = 59;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Location = new System.Drawing.Point(16, 82);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
-            this.btnUpdate.TabIndex = 58;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
@@ -286,7 +276,7 @@
             // 
             // btnPopulate
             // 
-            this.btnPopulate.Location = new System.Drawing.Point(16, 53);
+            this.btnPopulate.Location = new System.Drawing.Point(16, 82);
             this.btnPopulate.Name = "btnPopulate";
             this.btnPopulate.Size = new System.Drawing.Size(75, 23);
             this.btnPopulate.TabIndex = 54;
@@ -506,7 +496,6 @@
             this.Controls.Add(this.label15);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnAddNew);
             this.Controls.Add(this.btnSearch);
@@ -560,7 +549,6 @@
         private System.Windows.Forms.DateTimePicker dtpStuDob;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnAddNew;
         private System.Windows.Forms.Button btnSearch;

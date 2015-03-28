@@ -84,18 +84,6 @@ namespace EducationInstitute.Forms
             SearchHallData();
         }
 
-        private void SearchHallData()
-        {
-            SqlCommand cmd = new SqlCommand("sp_Search_HallData", obj.sqlConnection);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@HallNo", txtHallNo.Text);
-            DataTable dt = new DataTable();
-            rs = cmd.ExecuteReader();
-            dt.Load(rs);
-            dgvHallDetails.DataSource = dt;
-            rs.Close();
-        }
-
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -110,6 +98,19 @@ namespace EducationInstitute.Forms
             populateData = new PublicClasses.PopulateData();
             dgvHallDetails.DataSource = populateData.PopulateDetails("sp_Select_HallData", obj.sqlConnection, rs);
           
+        }
+
+
+        private void SearchHallData()
+        {
+            SqlCommand cmd = new SqlCommand("sp_Search_HallData", obj.sqlConnection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@HallNo", txtHallNo.Text);
+            DataTable dt = new DataTable();
+            rs = cmd.ExecuteReader();
+            dt.Load(rs);
+            dgvHallDetails.DataSource = dt;
+            rs.Close();
         }
 
         private void SaveData()
@@ -183,9 +184,16 @@ namespace EducationInstitute.Forms
             }
             if (!rs.NextResult())
             {
-                newHallNo = Regex.Replace(oldHallNo, "\\d+",
-                  m => (int.Parse(m.Value) + 1).ToString(new string('0', m.Value.Length)));
-                txtHallNo.Text = newHallNo;
+                if (oldHallNo != null)
+                {
+                    newHallNo = Regex.Replace(oldHallNo, "\\d+",
+                      m => (int.Parse(m.Value) + 1).ToString(new string('0', m.Value.Length)));
+                }
+                else
+                {
+                    newHallNo = "H0001";
+                }
+                    txtHallNo.Text = newHallNo;
             }
             rs.Close();
          
@@ -207,8 +215,7 @@ namespace EducationInstitute.Forms
 
         #endregion
 
-#region Shortcut keys
-
+        #region Shortcut keys
         
         private void frmHallDetails_KeyUp(object sender, KeyEventArgs e)
         {
@@ -240,7 +247,7 @@ namespace EducationInstitute.Forms
          }
 
         }
-#endregion 
+        #endregion 
 
     }
 }
