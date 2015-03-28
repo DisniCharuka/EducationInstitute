@@ -111,7 +111,7 @@ namespace EducationInstitute.Forms
         private void btnAddNew_Click(object sender, EventArgs e)
         {
             ClearSpace(this);
-           // GetNextEmployeeId();
+            GetNextEmployeeId();
             newData = 1;
         }
 
@@ -128,11 +128,16 @@ namespace EducationInstitute.Forms
             }
             if (!rs.NextResult())
             {
-               
+                if (oldEmpId != null)
+                {
                     newEmpId = Regex.Replace(oldEmpId, "\\d+",
                       m => (int.Parse(m.Value) + 1).ToString(new string('0', m.Value.Length)));
-                    txtEmployeeId.Text = newEmpId;
-                
+                }
+                else
+                {
+                    newEmpId = "Emp0001";
+                }
+                txtEmployeeId.Text = newEmpId;
             }
             rs.Close();
         }
@@ -174,6 +179,19 @@ namespace EducationInstitute.Forms
 
 
             }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            DeleteEmployeeData();
+        }
+
+        private void DeleteEmployeeData()
+        {
+            deleteData = new PublicClasses.DeleteData();
+            deleteData.DeleteDetails("sp_Delete_EmployeeData", obj.sqlConnection, "@Employee_Id", txtEmployeeId.Text.ToString());
+            MessageBox.Show(Properties.Resources.deleteEmployee, Properties.Resources.CompanyName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            PopulateData();
         }
 
        

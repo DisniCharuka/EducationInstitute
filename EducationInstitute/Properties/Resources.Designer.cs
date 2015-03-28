@@ -97,7 +97,7 @@ namespace EducationInstitute.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have successfully saved an Employee .
+        ///   Looks up a localized string similar to You have successfully inserted an Employee .
         /// </summary>
         internal static string insertEmployee {
             get {
@@ -106,7 +106,7 @@ namespace EducationInstitute.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have successfully saved a Hall Detail.
+        ///   Looks up a localized string similar to You have successfully inserted a Hall Detail.
         /// </summary>
         internal static string insertHallDetail {
             get {

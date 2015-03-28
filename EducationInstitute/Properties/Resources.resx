@@ -130,10 +130,10 @@
     <value>You have successfully deleted a Hall Detail</value>
   </data>
   <data name="insertEmployee" xml:space="preserve">
-    <value>You have successfully saved an Employee </value>
+    <value>You have successfully inserted an Employee </value>
   </data>
   <data name="insertHallDetail" xml:space="preserve">
-    <value>You have successfully saved a Hall Detail</value>
+    <value>You have successfully inserted a Hall Detail</value>
   </data>
   <data name="updatedEmployee" xml:space="preserve">
     <value>You have successfully updated an Employee </value>
