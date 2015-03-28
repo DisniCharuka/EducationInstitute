@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 using System.Collections;
-using System.Text;
 using System.IO;
 using System.Web;
 
@@ -208,6 +207,40 @@ namespace EducationInstitute.Forms
 
         #endregion
 
+#region Shortcut keys
+
+        
+        private void frmHallDetails_KeyUp(object sender, KeyEventArgs e)
+        {
+         if (e.KeyCode == Keys.F2)
+            {
+                PopulateData();
+            }
+         else if (e.KeyCode == Keys.F3)
+         {
+             ClearSpace(this);
+             GetNextHallNo();
+             newData = 1;
+         }
+         else if (e.KeyCode == Keys.F4)
+         {
+             SaveData();
+         }
+         else if(e.KeyCode == Keys.F5)
+         {
+             ClearSpace(this);
+         }
+         else if (e.KeyCode == Keys.F6)
+         {
+             DeleteHallData();
+         }
+         else
+         {
+             MessageBox.Show("No Function");
+         }
+
+        }
+#endregion 
 
     }
 }

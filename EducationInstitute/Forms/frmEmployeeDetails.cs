@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 using System.Collections;
-using System.Text;
 using System.IO;
 using System.Web;
 
@@ -63,7 +62,36 @@ namespace EducationInstitute.Forms
             SaveData();
         }
 
+        private void btnAddNew_Click(object sender, EventArgs e)
+        {
+            ClearSpace(this);
+            GetNextEmployeeId();
+            newData = 1;
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearSpace(this);
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            DeleteEmployeeData();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         #endregion
+
+        #region Methods
 
         private void PopulateData()
         {
@@ -108,12 +136,33 @@ namespace EducationInstitute.Forms
 
         }
 
-        private void btnAddNew_Click(object sender, EventArgs e)
+       
+        private void DeleteEmployeeData()
         {
-            ClearSpace(this);
-            GetNextEmployeeId();
-            newData = 1;
+            deleteData = new PublicClasses.DeleteData();
+            deleteData.DeleteDetails("sp_Delete_EmployeeData", obj.sqlConnection, "@Employee_Id", txtEmployeeId.Text.ToString());
+            MessageBox.Show(Properties.Resources.deleteEmployee, Properties.Resources.CompanyName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            PopulateData();
         }
+
+        #endregion
+
+        #region Clear Space method
+
+        private void ClearSpace(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c is TextBox)
+                    ((TextBox)c).Clear();
+                else
+                    ClearSpace(c);
+            }
+        }
+
+        #endregion
+
+        #region Get next Employee Id
 
         private void GetNextEmployeeId()
         {
@@ -142,26 +191,9 @@ namespace EducationInstitute.Forms
             rs.Close();
         }
 
-        private void ClearSpace(Control control)
-        {
-            foreach (Control c in control.Controls)
-            {
-                if (c is TextBox)
-                    ((TextBox)c).Clear();
-                else
-                    ClearSpace(c);
-            }
-        }
+        #endregion
 
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            ClearSpace(this);
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        #region Data grid view Actions
 
         private void dgvEmployeeDetails_SelectionChanged(object sender, EventArgs e)
         {
@@ -181,21 +213,38 @@ namespace EducationInstitute.Forms
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        #endregion
+
+        private void btnSearch_KeyUp(object sender, KeyEventArgs e)
         {
-            DeleteEmployeeData();
+            if (e.KeyCode == Keys.F2)
+            {
+                PopulateData();
+            }
+            else if (e.KeyCode == Keys.F3)
+            {
+                ClearSpace(this);
+                GetNextEmployeeId();
+                newData = 1;
+            }
+            else if (e.KeyCode == Keys.F4)
+            {
+                SaveData();
+            }
+            else if (e.KeyCode == Keys.F5)
+            {
+                ClearSpace(this);
+            }
+            else if (e.KeyCode == Keys.F6)
+            {
+                DeleteEmployeeData();
+            }
+            else
+            {
+                MessageBox.Show("No Function");
+            }
         }
 
-        private void DeleteEmployeeData()
-        {
-            deleteData = new PublicClasses.DeleteData();
-            deleteData.DeleteDetails("sp_Delete_EmployeeData", obj.sqlConnection, "@Employee_Id", txtEmployeeId.Text.ToString());
-            MessageBox.Show(Properties.Resources.deleteEmployee, Properties.Resources.CompanyName, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            PopulateData();
-        }
 
-       
-
-        
     }
 }
