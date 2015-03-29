@@ -12,6 +12,8 @@ using System.Text.RegularExpressions;
 using System.Collections;
 using System.IO;
 using System.Web;
+using EducationInstitute.DialogBoxes;
+using EducationInstitute.PublicClasses;
 
 namespace EducationInstitute.Forms
 {
@@ -19,9 +21,9 @@ namespace EducationInstitute.Forms
     { 
         #region Public Properties
 
-        EducationInstitute.PublicClasses.DBConnection obj;
-        EducationInstitute.PublicClasses.PopulateData populateData;
-        EducationInstitute.PublicClasses.DeleteData deleteData;
+        DBConnection obj;
+        PopulateData populateData;
+        DeleteData deleteData;
         SqlDataReader rs = null;
         int newData = 0;
         String oldHallNo = null;
@@ -103,14 +105,38 @@ namespace EducationInstitute.Forms
 
         private void SearchHallData()
         {
-            SqlCommand cmd = new SqlCommand("sp_Search_HallData", obj.sqlConnection);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@HallNo", txtHallNo.Text);
-            DataTable dt = new DataTable();
-            rs = cmd.ExecuteReader();
-            dt.Load(rs);
-            dgvHallDetails.DataSource = dt;
-            rs.Close();
+            //SqlCommand cmd = new SqlCommand("sp_Search_HallData", obj.sqlConnection);
+            //cmd.CommandType = CommandType.StoredProcedure;
+            //cmd.Parameters.AddWithValue("@HallNo", txtHallNo.Text);
+            //DataTable dt = new DataTable();
+            //rs = cmd.ExecuteReader();
+            //dt.Load(rs);
+            //dgvHallDetails.DataSource = dt;
+            //rs.Close();
+
+            dlgSearch dlgSearchHallDetails = new dlgSearch("sp_Search_HallData", "HallNo", "HallName","unused", "Search Hall Details");
+
+            if (dlgSearchHallDetails.ShowDialog() == DialogResult.OK)
+            {
+                
+                this.rs = dlgSearchHallDetails.rs;
+
+                if (rs.HasRows)
+                {
+                    DataTable dt = new DataTable();
+                    dt.Load(rs);
+                    dgvHallDetails.DataSource = dt;
+                    rs.Close();
+                }
+                else
+                {
+                    MessageBox.Show("No data found!");
+                }
+            }
+
+           
+            
+
         }
 
         private void SaveData()

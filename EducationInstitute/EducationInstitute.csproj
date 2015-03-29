@@ -122,6 +122,9 @@
     <Compile Include="PublicClasses\DeleteData.cs" />
     <Compile Include="PublicClasses\PopulateData.cs" />
     <Compile Include="PublicClasses\SaveData.cs" />
+    <EmbeddedResource Include="DialogBoxes\dlgSearch.resx">
+      <DependentUpon>dlgSearch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

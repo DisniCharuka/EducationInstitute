@@ -80,7 +80,12 @@ namespace EducationInstitute.Forms
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            SearchData();
+        }
 
+        private void SearchData()
+        {
+            throw new NotImplementedException();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -105,8 +110,6 @@ namespace EducationInstitute.Forms
             MessageBox.Show(Properties.Resources.deleteSubject, Properties.Resources.CompanyName, MessageBoxButtons.OK, MessageBoxIcon.Information);
             PopulateData();
         }
-
-        
 
         private void SaveData()
         {
