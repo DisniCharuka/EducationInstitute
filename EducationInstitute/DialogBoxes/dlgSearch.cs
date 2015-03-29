@@ -21,7 +21,7 @@ namespace EducationInstitute.DialogBoxes
 
         SqlConnection sqlConnection = new SqlConnection();
         DBConnection obj;
-       public SqlDataReader rs;
+        public SqlDataReader rs;
        
 
         public dlgSearch(String storedProc, String parameter1, String parameter2, String parameter3, String title)

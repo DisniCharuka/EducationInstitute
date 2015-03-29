@@ -133,6 +133,15 @@ namespace EducationInstitute.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to eryzedtjur6ij eWY yEtybetaatdxh.
+        /// </summary>
+        internal static string noDataFound {
+            get {
+                return ResourceManager.GetString("noDataFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have successfully updated an Employee .
         /// </summary>
         internal static string updatedEmployee {

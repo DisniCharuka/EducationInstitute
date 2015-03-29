@@ -12,6 +12,8 @@ using System.Text.RegularExpressions;
 using System.Collections;
 using System.IO;
 using System.Web;
+using EducationInstitute.PublicClasses;
+using EducationInstitute.DialogBoxes;
 
 namespace EducationInstitute.Forms
 {
@@ -20,9 +22,9 @@ namespace EducationInstitute.Forms
 
         #region Public Properties
 
-        EducationInstitute.PublicClasses.DBConnection obj;
-        EducationInstitute.PublicClasses.PopulateData populateData;
-        EducationInstitute.PublicClasses.DeleteData deleteData;
+        DBConnection obj;
+        PopulateData populateData;
+        DeleteData deleteData;
         SqlDataReader rs = null;
         int newData = 0;
         String oldEmpId = null;
@@ -76,8 +78,10 @@ namespace EducationInstitute.Forms
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-
+            SearchEmployeeData();
         }
+
+       
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -97,6 +101,28 @@ namespace EducationInstitute.Forms
         {
             populateData = new PublicClasses.PopulateData();
             dgvEmployeeDetails.DataSource = populateData.PopulateDetails("sp_Select_EmployeeData", obj.sqlConnection, rs);
+        }
+
+        private void SearchEmployeeData()
+        {
+            dlgSearch dlgSearchHallDetails = new dlgSearch("sp_Search_EmployeeData", "EmployeeId", "EmployeeNic", "EmployeeName", "Search Hall Details");
+
+            if (dlgSearchHallDetails.ShowDialog() == DialogResult.OK)
+            {
+                this.rs = dlgSearchHallDetails.rs;
+
+                if (rs.HasRows)
+                {
+                    DataTable dt = new DataTable();
+                    dt.Load(rs);
+                    dgvEmployeeDetails.DataSource = dt;
+                    rs.Close();
+                }
+                else
+                {
+                    MessageBox.Show("No data found!", Properties.Resources.CompanyName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
         }
 
         private void SaveData()

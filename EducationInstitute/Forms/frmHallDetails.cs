@@ -105,20 +105,10 @@ namespace EducationInstitute.Forms
 
         private void SearchHallData()
         {
-            //SqlCommand cmd = new SqlCommand("sp_Search_HallData", obj.sqlConnection);
-            //cmd.CommandType = CommandType.StoredProcedure;
-            //cmd.Parameters.AddWithValue("@HallNo", txtHallNo.Text);
-            //DataTable dt = new DataTable();
-            //rs = cmd.ExecuteReader();
-            //dt.Load(rs);
-            //dgvHallDetails.DataSource = dt;
-            //rs.Close();
-
             dlgSearch dlgSearchHallDetails = new dlgSearch("sp_Search_HallData", "HallNo", "HallName","unused", "Search Hall Details");
 
             if (dlgSearchHallDetails.ShowDialog() == DialogResult.OK)
             {
-                
                 this.rs = dlgSearchHallDetails.rs;
 
                 if (rs.HasRows)
@@ -130,13 +120,9 @@ namespace EducationInstitute.Forms
                 }
                 else
                 {
-                    MessageBox.Show("No data found!");
+                    MessageBox.Show("No data found!", Properties.Resources.CompanyName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
-
-           
-            
-
         }
 
         private void SaveData()

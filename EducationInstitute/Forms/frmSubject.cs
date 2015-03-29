@@ -12,16 +12,17 @@ using System.Text.RegularExpressions;
 using System.Collections;
 using System.IO;
 using System.Web;
+using EducationInstitute.PublicClasses;
+using EducationInstitute.DialogBoxes;
 
 namespace EducationInstitute.Forms
 {
     public partial class frmSubject : Form
     {
         #region Public Properties
-
-        EducationInstitute.PublicClasses.DBConnection obj;
-        EducationInstitute.PublicClasses.PopulateData populateData;
-        EducationInstitute.PublicClasses.DeleteData deleteData;
+        DBConnection obj;
+        PopulateData populateData;
+        DeleteData deleteData;
         SqlDataReader rs = null;
         int newData = 0;
         String oldSubjectId = null;
@@ -85,7 +86,24 @@ namespace EducationInstitute.Forms
 
         private void SearchData()
         {
-            throw new NotImplementedException();
+            dlgSearch dlgSearchSubjectDetails = new dlgSearch("sp_Search_SubjectData", "SubjectId", "SubjectName", "unused", "Search Subject Details");
+
+            if (dlgSearchSubjectDetails.ShowDialog() == DialogResult.OK)
+            {
+                this.rs = dlgSearchSubjectDetails.rs;
+
+                if (rs.HasRows)
+                {
+                    DataTable dt = new DataTable();
+                    dt.Load(rs);
+                    dgvSubjectDetails.DataSource = dt;
+                    rs.Close();
+                }
+                else
+                {
+                   MessageBox.Show("No data found!", Properties.Resources.CompanyName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
         }
 
         private void btnExit_Click(object sender, EventArgs e)
