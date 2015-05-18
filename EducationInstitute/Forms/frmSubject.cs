@@ -164,6 +164,19 @@ namespace EducationInstitute.Forms
 
         #endregion
 
+        #region Data grid view Actions
+
+        private void dgvSubjectDetails_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvSubjectDetails.SelectedRows.Count == 1)
+            {
+                txtSubjectId.Text = dgvSubjectDetails.SelectedRows[0].Cells[0].Value.ToString();
+                txtSubjectName.Text = dgvSubjectDetails.SelectedRows[0].Cells[1].Value.ToString();
+            }
+        }
+
+        #endregion
+
         #region Get Next Subject Id
 
         private void GetNextSubjectId()
@@ -243,6 +256,8 @@ namespace EducationInstitute.Forms
         }
 
         #endregion
+
+       
 
     }
 }

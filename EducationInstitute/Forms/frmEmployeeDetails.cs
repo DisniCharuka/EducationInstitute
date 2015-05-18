@@ -105,7 +105,7 @@ namespace EducationInstitute.Forms
 
         private void SearchEmployeeData()
         {
-            dlgSearch dlgSearchHallDetails = new dlgSearch("sp_Search_EmployeeData", "EmployeeId", "EmployeeNic", "EmployeeName", "Search Hall Details");
+            dlgSearch dlgSearchHallDetails = new dlgSearch("sp_Search_EmployeeData", "EmployeeId", "EmployeeNic", "EmployeeName", "Search Employee Details");
 
             if (dlgSearchHallDetails.ShowDialog() == DialogResult.OK)
             {
@@ -240,8 +240,6 @@ namespace EducationInstitute.Forms
                 txtEmpAddress2.Text = dgvEmployeeDetails.SelectedRows[0].Cells[6].Value.ToString();
                 txtEmpAddress3.Text = dgvEmployeeDetails.SelectedRows[0].Cells[7].Value.ToString();
                 txtEmpContactNo.Text = dgvEmployeeDetails.SelectedRows[0].Cells[8].Value.ToString();
-
-
             }
         }
 

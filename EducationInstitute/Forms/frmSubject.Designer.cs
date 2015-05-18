@@ -50,6 +50,7 @@
             this.dgvSubjectDetails.Name = "dgvSubjectDetails";
             this.dgvSubjectDetails.Size = new System.Drawing.Size(284, 165);
             this.dgvSubjectDetails.TabIndex = 129;
+            this.dgvSubjectDetails.SelectionChanged += new System.EventHandler(this.dgvSubjectDetails_SelectionChanged);
             this.dgvSubjectDetails.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgvSubjectDetails_KeyUp);
             // 
             // txtSubjectName
