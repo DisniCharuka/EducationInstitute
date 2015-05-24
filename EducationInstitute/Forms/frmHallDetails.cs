@@ -228,36 +228,36 @@ namespace EducationInstitute.Forms
         #endregion
 
         #region Shortcut keys
-        
-        private void frmHallDetails_KeyUp(object sender, KeyEventArgs e)
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-         if (e.KeyCode == Keys.F2)
+            if (keyData == Keys.F2)
             {
                 PopulateData();
             }
-         else if (e.KeyCode == Keys.F3)
-         {
-             ClearSpace(this);
-             GetNextHallNo();
-             newData = 1;
-         }
-         else if (e.KeyCode == Keys.F4)
-         {
-             SaveData();
-         }
-         else if(e.KeyCode == Keys.F5)
-         {
-             ClearSpace(this);
-         }
-         else if (e.KeyCode == Keys.F6)
-         {
-             DeleteHallData();
-         }
-         else
-         {
-             MessageBox.Show("No Function");
-         }
-
+            else if (keyData == Keys.F3)
+            {
+                ClearSpace(this);
+                GetNextHallNo();
+                newData = 1;
+            }
+            else if (keyData == Keys.F4)
+            {
+                SaveData();
+            }
+            else if (keyData == Keys.F5)
+            {
+                ClearSpace(this);
+            }
+            else if (keyData == Keys.F6)
+            {
+                DeleteHallData();
+            }
+            else
+            {
+                MessageBox.Show("No Function");
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
         #endregion 
 
