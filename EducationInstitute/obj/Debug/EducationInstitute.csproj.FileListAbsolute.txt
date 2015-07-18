@@ -22,3 +22,4 @@ E:\Education Institute\EducationInstitute\EducationInstitute\bin\Debug\Education
 E:\Education Institute\EducationInstitute\EducationInstitute\obj\Debug\EducationInstitute.csprojResolveAssemblyReference.cache
 E:\Education Institute\EducationInstitute\EducationInstitute\obj\Debug\EducationInstitute.exe
 E:\Education Institute\EducationInstitute\EducationInstitute\obj\Debug\EducationInstitute.pdb
+E:\Education Institute\EducationInstitute\EducationInstitute\obj\Debug\EducationInstitute.Forms.MDImain.resources

@@ -116,6 +116,12 @@
     <Compile Include="Forms\frmTutorialDetails.Designer.cs">
       <DependentUpon>frmTutorialDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MDImain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MDImain.Designer.cs">
+      <DependentUpon>MDImain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicClasses\DBConnection.cs" />
@@ -157,6 +163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmTutorialDetails.resx">
       <DependentUpon>frmTutorialDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MDImain.resx">
+      <DependentUpon>MDImain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
