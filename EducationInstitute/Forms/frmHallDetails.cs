@@ -51,17 +51,39 @@ namespace EducationInstitute.Forms
 
         #endregion
 
+        #region Form Load method 
+
+        private void frmHallDetails_Load(object sender, EventArgs e)
+        {
+            DisableAllControls(this, false);
+            EnableButtons(btnPopulate);
+            EnableButtons(btnAddNew);
+            EnableButtons(btnExit);
+        }
+
+        #endregion
+
         #region Event Handlers
 
         private void btnPopulate_Click(object sender, EventArgs e)
         {
             PopulateData();
+            label1.Enabled = true;
+            label2.Enabled = true;
+            dgvHallDetails.Enabled = true;
+            btnDelete.Enabled = false;
+            btnClear.Enabled = true;
         }
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
             ClearSpace(this);
+            label1.Enabled = true;
+            label2.Enabled = true;
+            dgvHallDetails.Enabled = true;
+            txtHallName.Enabled = true;
             GetNextHallNo();
+            btnSave.Enabled = true;
             newData = 1;
         }
 
@@ -174,8 +196,11 @@ namespace EducationInstitute.Forms
         {
             if (dgvHallDetails.SelectedRows.Count == 1)
             {
+                txtHallName.Enabled = true;
+                txtHallNo.Enabled = true;
                 txtHallNo.Text = dgvHallDetails.SelectedRows[0].Cells[0].Value.ToString();
                 txtHallName.Text = dgvHallDetails.SelectedRows[0].Cells[1].Value.ToString();
+                btnDelete.Enabled = true;
             }
         }
 
@@ -253,13 +278,31 @@ namespace EducationInstitute.Forms
             {
                 DeleteHallData();
             }
-            else
-            {
-                MessageBox.Show("No Function");
-            }
             return base.ProcessCmdKey(ref msg, keyData);
         }
         #endregion 
 
+        
+        #region Control Enable and Disable Methods
+
+        private void EnableButtons(Control button)
+        {
+            if (button != null)
+            {
+                button.Enabled = true;
+                EnableButtons(button.Parent);
+            }
+        }
+
+        private void DisableAllControls(Control con, bool value)
+        {
+            foreach (Control c in con.Controls)
+            {
+                DisableAllControls(c, value);
+            }
+            con.Enabled = value;
+        }
+
+        #endregion
     }
 }

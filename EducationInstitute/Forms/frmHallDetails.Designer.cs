@@ -173,7 +173,7 @@
             this.Controls.Add(this.btnPopulate);
             this.Name = "frmHallDetails";
             this.Text = "frmHallDetails";
-            //this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.frmHallDetails_KeyUp);
+            this.Load += new System.EventHandler(this.frmHallDetails_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvHallDetails)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

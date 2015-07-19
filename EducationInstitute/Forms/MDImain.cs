@@ -8,17 +8,30 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EducationInstitute.PublicClasses;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace EducationInstitute.Forms
 {
     public partial class MDImain : Form
     {
         private int childFormNumber = 0;
+        DBConnection obj;
 
         public MDImain()
         {
             InitializeComponent();
+            DBConnectionMethod();
+            WindowState = FormWindowState.Maximized;
         }
+
+        private void DBConnectionMethod()
+        {
+            obj = new EducationInstitute.PublicClasses.DBConnection();
+            obj.DbConnectionMethod();
+            
+        }
+
 
         private void ShowNewForm(object sender, EventArgs e)
         {
